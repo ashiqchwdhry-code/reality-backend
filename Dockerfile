@@ -4,11 +4,9 @@ FROM python:3.11-slim
 # Set working directory inside the container
 WORKDIR /app
 
-# Install system dependencies required for OpenCV and image processing
-RUN apt-get update && apt-get install -y \
-    libgl1 \
-    libglib2.0-0 \
-    && rm -rf /var/lib/apt/lists/*
+# Upgrade pip to ensure the latest resolvers are used
+RUN pip install --no-cache-dir --upgrade pip
+
 # Copy and install python dependencies
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
